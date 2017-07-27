@@ -1,4 +1,4 @@
-## Get Start
+## Getting start
 ```
 $ git clone https://github.com/yeondam88/react-crpyto-compare-app.git
 $ npm install
