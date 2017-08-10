@@ -7,13 +7,16 @@ const Footer = props => {
         <div className="content has-text-centered">
           <p>
             <strong>This site made with ❤</strong> by{" "}
-            <a href="http://jgthms.com">Lloyd Park</a>. The source code is
-            licensed
+            <a href="https://github.com/yeondam88">Lloyd Park</a>. The source
+            code is licensed
             <a href="http://opensource.org/licenses/mit-license.php"> MIT</a>.
             The website content is licensed{" "}
           </p>
           <p>
-            <a className="icon" href="https://github.com/jgthms/bulma">
+            <a
+              className="icon"
+              href="https://github.com/yeondam88/react-crpyto-compare-app"
+            >
               <i className="fa fa-github" />
             </a>
           </p>

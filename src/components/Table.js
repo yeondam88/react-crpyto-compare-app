@@ -1,8 +1,36 @@
 import React from "react";
+import { getCoinData, CRYPTOCOMPARE_API_URI } from "../utils/API";
 
 class Table extends React.Component {
+  state = {
+    coinData: {}
+  };
+
+  componentDidMount() {
+    getCoinData().then(coinData => {
+      this.setState(state => ({ coinData }));
+    });
+  }
+
+  getImgUrl = symbol => {
+    if (this.state.coinData[symbol]) {
+      return this.state.coinData[symbol].ImageUrl;
+    } else {
+      return null;
+    }
+  };
+
+  getCoinUrl = symbol => {
+    if (this.state.coinData[symbol]) {
+      return this.state.coinData[symbol].Url;
+    } else {
+      return null;
+    }
+  };
+
   render() {
     const { isFetching, coins } = this.props;
+    const { coinData } = this.state;
     if (isFetching) {
       return <h1>Loading...</h1>;
     }
@@ -22,7 +50,12 @@ class Table extends React.Component {
         </thead>
         <tbody>
           {coins.map(coin => {
-            let imgUrl = require(`./images/${coin.symbol}.png`);
+            const imgUrl = `${CRYPTOCOMPARE_API_URI}${this.getImgUrl(
+              coin.symbol
+            )}`;
+            const coinUrl = `${CRYPTOCOMPARE_API_URI}${this.getCoinUrl(
+              coin.symbol
+            )}`;
             return (
               <tr>
                 <td>
@@ -30,13 +63,15 @@ class Table extends React.Component {
                 </td>
                 <td>
                   <img src={imgUrl} />
-                  {coin.name}
+                  <a style={{ color: "#000" }} href={coinUrl} target="_blank">
+                    {coin.name}
+                  </a>
                 </td>
                 <td>
                   {coin.symbol}
                 </td>
                 <td>
-                  ${coin.price_usd}
+                  ${parseFloat(coin.price_usd).toFixed(2)}
                 </td>
                 <td
                   style={
@@ -72,7 +107,7 @@ class Table extends React.Component {
                     : coin.percent_change_7d}%
                 </td>
                 <td>
-                  ${coin.market_cap_usd}
+                  ${parseInt(coin.market_cap_usd).toLocaleString()}
                 </td>
               </tr>
             );
