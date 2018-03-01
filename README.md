@@ -11,3 +11,5 @@ $ npm start
  + CoinMarketCap API used to fetched data [Go](https://coinmarketcap.com/api/)
  + Cryptocompare API used to fetched coin's logo image url & detail info [Go](https://cryptocompare.com/api)
 
+## TODO:
+ + Cryptocompare API changed... need to reimplement the fetching the data..
