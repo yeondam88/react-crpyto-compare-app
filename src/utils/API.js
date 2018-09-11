@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export let CRYPTOCOMPARE_API_URI = "https://www.cryptocompare.com";
+export let CRYPTOCOMPARE_API_URI =
+  "https://cors-anywhere.herokuapp.com/https://www.cryptocompare.com";
 export let COINMARKETCAP_API_URI = "https://api.coinmarketcap.com";
 export let UPDATE_INTERVAL = 60 * 1000;
 
@@ -21,7 +22,8 @@ export async function getCoinData() {
     const response = await axios.get(
       `${CRYPTOCOMPARE_API_URI}/api/data/coinlist`
     );
-    const coinData = response.data.Data;
+    const coinData = await response.data.Data;
+    console.log(coinData);
     return coinData;
   } catch (error) {
     console.error(error);
